@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            //llamar al text area usando su clase
+            const texto = document.body.querySelector(".story");
+            //llamar los botones
+            const addtext = document.body.querySelector("#set-text");
+            
+            console.log(addtext);
+
+            addtext.addEventListener("click", () =>{
+                texto.textContent = "Hola soy el texto";
+            })
+
+            const cleartext = document.body.querySelector("#clear-text");
+            cleartext.addEventListener("click", () =>{
+                texto.textContent = "";
+            })
+            
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <textarea class="story"></textarea>
+        <button id="set-text" type="button">add</button>
+        <button id="clear-text" type="button">clear</button>
+    </div>
+</body>
+</html>

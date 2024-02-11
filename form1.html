@@ -4,52 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        form {
-            /* Center the form on the page */
-            margin: 0 auto;
-            width: 400px;
-            /* Form outline */
-            padding: 1em;
-            border: 1px solid #ccc;
-            border-radius: 1em;
-        }
+    <script>
 
-    </style>
+        document.addEventListener("DOMContentLoaded", function(){
+            //agarrar el formulario
+            const miForm = document.getElementById("formulario");
+            //traer los elementos de la tabla , el body
+            const miTable = document.getElementById("tabla");
+            const dataBody = document.getElementById("datosTabla");
+            //traer el boton de borrar
+            const btnBorrar = document.getElementById("btn_borrar");
+           
+            const encabezado = miTable.rows[0];
+            const cellsCount = encabezado.cells.length;
+            console.log(miTable.rows[0].cells[0]);
+
+            
+            //funcion que se activa cuando el boton enviar es precionado
+            miForm.addEventListener("submit", function(event){
+                //evita que el button submit refresque la pagina
+                event.preventDefault();
+
+                 //traer los valores del formulario
+                const name = document.getElementById("name").value;
+                const mail = document.getElementById("mail").value;
+                const msg = document.getElementById("msg").value;
+
+                //llama la funcion anadir datos
+                addData(name, mail, msg);
+
+                //resetea los campos de formulario
+                miForm.reset();
+            });
+
+            //funcion que agregua las filas
+            function addData(name, email, msg){
+
+                //crea una nueva fila en el cuerpo de la tabla
+                const newRow = dataBody.insertRow();
+                
+                for(let i = 0; i < cellsCount; i++){
+                    //crea una celda en la fila
+                    const cell = newRow.insertCell(i);
+                     //inserta los valores en el texto de las celdas inserta el agrumento i en la celda i
+                    cell.textContent = arguments[i];
+                }
+            }
+
+            //funcion que borrar los elementos de una lista
+            btnBorrar.addEventListener("click", function(){
+
+                //llama los elemntos tr de la lista
+                const filas = dataBody.getElementsByTagName("tr");
+                //itera por el array de las filas y elimina cada hijo del body
+                for(let i = filas.length - 1; i >= 0; i--){
+                    dataBody.removeChild(filas[i]);
+                }
+            })
+            
+
+        })
+        
+       
+
+    </script>
 </head>
 <body>
-    <form action="#" method="get">
+    <form id="formulario">
         <!-- ul and li are for structure and easy styling -->
         <ul>
             <li>
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="user_name">
+                <input type="text" id="name" name="user_name" required>
             </li>
             <li>
                 <label for="mail">Email:</label>
-                <input type="text" id="mail" name="user_email">
+                <input type="text" id="mail" name="user_email" required>
             </li>
             <li>
                 <label for="msg">Message:</label>
-                <textarea id="msg" name="user_message"></textarea>
-            </li>
-            <li>
-                <fieldset>
-                    <legend>Favorite fruit</legend>
-                    <p>
-                        <input type="checkbox" id="taste_1" name="taste_cherry" value="cherry">
-                        <label for="taste_1">I like cherry</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" id="taste_2" name="taste_banana" value="banana">
-                        <label for="taste_2">I like banana</label>
-                    </p>
-                </fieldset>
+                <textarea id="msg" name="user_message" required></textarea>
             </li>
             <li>
                 <button type="submit">Send your message</button>
+                <button type="button" id="btn_borrar">borrar la tabla</button>
             </li>
         </ul>
     </form>
+
+    <table id="tabla" border="2px">
+        <thead id="encabezado">
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Mensaje</th>
+        </thead>
+        <tbody id="datosTabla">
+        </tbody>
+    </table>
 </body>
 </html>

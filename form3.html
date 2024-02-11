@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script>
+        //run this when the document is loades
+        window.onload = () =>{
+
+            //create elements returns the element that has just been created in the DOM.
+            const title = document.createElement("h1");
+            //crea un nodo de texto 
+            const contenidoTexto = document.createTextNode("hola mundo");
+
+            //junto el elemento creado h1 con el nodo de texto
+            title.appendChild(contenidoTexto);
+            document.body.appendChild(title);
+        }
+
+        const table = document.getElementById("table");
+        const tableAttrs = table.attributes;
+        
+       
+    </script>
 </head>
 <body>
     <form action="#">
@@ -45,5 +65,9 @@
             </li>
         </ul>
     </form>
+
+    <table>
+    </table>
+
 </body>
 </html>

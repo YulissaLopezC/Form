@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const contpadre = document.body.querySelector(".padre");
+            const btnadd = document.body.querySelector("#addChild");
+            const btnrm = document.body.querySelector("#rmChild");
+
+            btnadd.addEventListener("click", () =>{
+                const child = document.createElement("h1");
+                child.classList.add("hijo");
+                child.textContent = "hijo";
+
+                if(contpadre.childNodes.length > 0){
+                    return;
+                }
+                contpadre.appendChild(child);
+
+            })
+
+            btnrm.addEventListener("click", ()=>{
+                const child = document.body.querySelector(".hijo");
+                if(contpadre.childNodes.length === 0){
+                    return;
+                }
+                contpadre.removeChild(child);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="padre"></div>
+        <button id="addChild" type="button">add</button>
+        <button id="rmChild" type="button">remove</button>
+    </div>
+</body>
+</html>
